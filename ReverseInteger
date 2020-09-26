@@ -1,0 +1,38 @@
+class Solution {
+    public int reverse(int x) {
+        
+        boolean isNumberNegative = false; 
+        
+        if (x<0) {
+            isNumberNegative = true; 
+            x = Math.abs(x);
+        }
+                    
+        int length = String.valueOf(x).length(); //3 
+        Stack<Integer> s = new Stack<Integer>();  //empty stack of integers         
+        int[]digits = Integer.toString(x).chars().map(c -> c-'0').toArray();          
+        
+        for(int i=0; i<length;i++) // if i 22l 3, push into
+            s.push(digits[i]);
+        String result = "";
+        int temp=0; 
+        for(int i=0; i<length;i++) {
+            temp = (int) s.pop(); 
+            result= result+ "" + temp; 
+        }
+        
+        int resultFinal; 
+
+        try {
+         resultFinal=Integer.parseInt(result);   
+        }
+        catch(Exception e) {
+             resultFinal =0; 
+        }
+        
+        if (isNumberNegative) 
+            resultFinal = -resultFinal; 
+        
+        return resultFinal; 
+    }
+}
