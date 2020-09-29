@@ -1,38 +1,34 @@
+// Runtime: 1 ms, faster than 100.00% of Java online submissions for Reverse Integer.
+// Memory Usage: 36.5 MB, less than 90.90% of Java online submissions for Reverse Integer.
+
+
 class Solution {
     public int reverse(int x) {
-        
-        boolean isNumberNegative = false; 
-        
-        if (x<0) {
-            isNumberNegative = true; 
-            x = Math.abs(x);
-        }
-                    
-        int length = String.valueOf(x).length(); //3 
-        Stack<Integer> s = new Stack<Integer>();  //empty stack of integers         
-        int[]digits = Integer.toString(x).chars().map(c -> c-'0').toArray();          
-        
-        for(int i=0; i<length;i++) // if i 22l 3, push into
-            s.push(digits[i]);
-        String result = "";
-        int temp=0; 
-        for(int i=0; i<length;i++) {
-            temp = (int) s.pop(); 
-            result= result+ "" + temp; 
+        boolean isNumberNegative=false;  
+        if (x>=0) 
+            isNumberNegative = false; 
+        else {
+            isNumberNegative=true; 
+               x= Math.abs(x); 
         }
         
-        int resultFinal; 
-
-        try {
-         resultFinal=Integer.parseInt(result);   
+        long reversed=0; 
+        while(x != 0) {
+            int digit = x % 10;
+            reversed = reversed * 10 + digit;
+                 
+        if(reversed>Integer.MAX_VALUE || reversed<Integer.MIN_VALUE)
+            return 0;
+            x /= 10;
         }
-        catch(Exception e) {
-             resultFinal =0; 
-        }
+   
+            
+         if (isNumberNegative==false) 
+            reversed = reversed; 
+        else 
+            reversed = reversed *-1;
         
-        if (isNumberNegative) 
-            resultFinal = -resultFinal; 
-        
-        return resultFinal; 
+            
+        return (int) reversed; 
     }
 }
